@@ -36,4 +36,7 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# React Native / Metro
+.metro-cache/
+
 app-example
