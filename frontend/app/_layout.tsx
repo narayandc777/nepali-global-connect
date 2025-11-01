@@ -14,15 +14,10 @@ function RootLayoutNav() {
   useEffect(() => {
     if (loading) return;
 
-    const inAuthGroup = segments[0] === '(auth)';
-
     if (!user && !loading) {
       // User is not authenticated, redirect to login
       router.replace('/login');
-    } else if (
-      user &&
-      (segments[0] === 'login' || segments[0] === 'register' || segments.length === 0)
-    ) {
+    } else if (user && (segments[0] === 'login' || segments[0] === 'register')) {
       // User is authenticated, redirect to home
       router.replace('/home');
     }
@@ -37,6 +32,7 @@ function RootLayoutNav() {
       <Stack.Screen name="forgot-password" />
       <Stack.Screen name="reset-password" />
       <Stack.Screen name="home" />
+      <Stack.Screen name="(tabs)" />
     </Stack>
   );
 }

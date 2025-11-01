@@ -41,7 +41,7 @@ export default function LoginScreen() {
       setLoading(true);
       setError('');
       await login(data.email, data.password);
-      router.replace('/home');
+      router.replace('/(tabs)/jobs');
     } catch (err: any) {
       setError(err.message || 'Login failed');
       setSnackbarVisible(true);
