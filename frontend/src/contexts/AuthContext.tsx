@@ -48,27 +48,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       // const response = await api.post('/auth/login', { email, password });
-      const response={
-        data:{
-          access_token:'test',
-          refresh_token:'test'
-        }
-      }
+      const response = {
+        data: {
+          access_token: 'test',
+          refresh_token: 'test',
+        },
+      };
       const { access_token, refresh_token } = response.data;
-      
+
       await secureStorage.setItem('access_token', access_token);
       await secureStorage.setItem('refresh_token', refresh_token);
-      
+
       // Get user info
       // const userResponse = await api.get('/auth/me');
       // setUser(userResponse.data);
-     
+
       setUser({
         id: 'string',
         email: 'string',
         username: 'string',
-        created_at: 'string'
-
+        created_at: 'string',
       });
     } catch (error: any) {
       throw new Error(error.response?.data?.detail || 'Login failed');
@@ -79,10 +78,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const response = await api.post('/auth/register', { email, password, username });
       const { access_token, refresh_token } = response.data;
-      
+
       await secureStorage.setItem('access_token', access_token);
       await secureStorage.setItem('refresh_token', refresh_token);
-      
+
       // Get user info
       const userResponse = await api.get('/auth/me');
       setUser(userResponse.data);

@@ -19,7 +19,10 @@ function RootLayoutNav() {
     if (!user && !loading) {
       // User is not authenticated, redirect to login
       router.replace('/login');
-    } else if (user && (segments[0] === 'login' || segments[0] === 'register' || segments.length === 0)) {
+    } else if (
+      user &&
+      (segments[0] === 'login' || segments[0] === 'register' || segments.length === 0)
+    ) {
       // User is authenticated, redirect to home
       router.replace('/home');
     }

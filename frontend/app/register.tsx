@@ -106,9 +106,7 @@ export default function RegisterScreen() {
                   />
                 )}
               />
-              {errors.username && (
-                <Text style={styles.errorText}>{errors.username.message}</Text>
-              )}
+              {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
 
               <Controller
                 control={control}
@@ -131,9 +129,7 @@ export default function RegisterScreen() {
                   />
                 )}
               />
-              {errors.email && (
-                <Text style={styles.errorText}>{errors.email.message}</Text>
-              )}
+              {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 
               <Controller
                 control={control}
@@ -162,9 +158,7 @@ export default function RegisterScreen() {
                   />
                 )}
               />
-              {errors.password && (
-                <Text style={styles.errorText}>{errors.password.message}</Text>
-              )}
+              {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
               <Controller
                 control={control}

@@ -2,7 +2,8 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import * as secureStorage from '../utils/secureStorage';
 
-const API_URL = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || process.env.EXPO_PUBLIC_BACKEND_URL || '';
+const API_URL =
+  Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
 export const api = axios.create({
   baseURL: `${API_URL}/api`,
@@ -22,7 +23,7 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response interceptor to handle token refresh
@@ -57,7 +58,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

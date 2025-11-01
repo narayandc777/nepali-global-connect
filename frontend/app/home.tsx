@@ -59,7 +59,7 @@ export default function HomeScreen() {
         {/* Coming Soon Features */}
         <View style={styles.featuresContainer}>
           <Text style={styles.featuresTitle}>Coming Soon</Text>
-          
+
           <Card style={styles.featureCard}>
             <Card.Content style={styles.featureContent}>
               <View style={styles.featureIconContainer}>
@@ -67,9 +67,7 @@ export default function HomeScreen() {
               </View>
               <View style={styles.featureTextContainer}>
                 <Text style={styles.featureTitle}>Events</Text>
-                <Text style={styles.featureDescription}>
-                  Create and manage community events
-                </Text>
+                <Text style={styles.featureDescription}>Create and manage community events</Text>
               </View>
             </Card.Content>
           </Card>
@@ -81,9 +79,7 @@ export default function HomeScreen() {
               </View>
               <View style={styles.featureTextContainer}>
                 <Text style={styles.featureTitle}>Posts & Feeds</Text>
-                <Text style={styles.featureDescription}>
-                  Share updates with the community
-                </Text>
+                <Text style={styles.featureDescription}>Share updates with the community</Text>
               </View>
             </Card.Content>
           </Card>
@@ -95,9 +91,7 @@ export default function HomeScreen() {
               </View>
               <View style={styles.featureTextContainer}>
                 <Text style={styles.featureTitle}>Community</Text>
-                <Text style={styles.featureDescription}>
-                  Connect with other Nepalese members
-                </Text>
+                <Text style={styles.featureDescription}>Connect with other Nepalese members</Text>
               </View>
             </Card.Content>
           </Card>

@@ -38,7 +38,6 @@ export default function LoginScreen() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-    
       setLoading(true);
       setError('');
       await login(data.email, data.password);
@@ -79,7 +78,7 @@ export default function LoginScreen() {
             <View style={styles.formContainer}>
               <Controller
                 control={control}
-                rules={{required: false}}
+                rules={{ required: false }}
                 name="email"
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
@@ -99,13 +98,11 @@ export default function LoginScreen() {
                   />
                 )}
               />
-              {errors.email && (
-                <Text style={styles.errorText}>{errors.email.message}</Text>
-              )}
+              {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 
               <Controller
                 control={control}
-                rules={{required: false}}
+                rules={{ required: false }}
                 name="password"
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
@@ -131,9 +128,7 @@ export default function LoginScreen() {
                   />
                 )}
               />
-              {errors.password && (
-                <Text style={styles.errorText}>{errors.password.message}</Text>
-              )}
+              {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
               <View style={styles.forgotPasswordContainer}>
                 <Link href="/forgot-password" asChild>

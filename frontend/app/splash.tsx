@@ -32,7 +32,7 @@ export default function SplashScreen() {
         toValue: 1,
         duration: 3000,
         useNativeDriver: true,
-      })
+      }),
     ).start();
 
     // Navigate after animation

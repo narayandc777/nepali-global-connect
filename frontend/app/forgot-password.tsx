@@ -55,10 +55,7 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <AuthContainer
-      title="Forgot Password"
-      subtitle="Enter your email to receive a reset link"
-    >
+    <AuthContainer title="Forgot Password" subtitle="Enter your email to receive a reset link">
       <View style={styles.form}>
         <AuthInput
           control={control}
