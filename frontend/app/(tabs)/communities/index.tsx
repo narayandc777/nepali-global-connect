@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Searchbar, FAB, Card, Avatar, Chip } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { colors } from '../../../src/theme/colors';
+import { colors, theme } from '../../../src/theme/colors';
 
 const MOCK_COMMUNITIES = [
   {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 16,
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
   },
   headerTitle: {
     fontWeight: 'bold',

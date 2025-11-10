@@ -13,7 +13,7 @@ import {
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { colors } from '../../../src/theme/colors';
+import { colors, theme } from '../../../src/theme/colors';
 
 const MOCK_JOBS = [
   {
@@ -72,24 +72,14 @@ export default function JobsScreen() {
         value={searchQuery}
         style={styles.searchBar}
         icon="magnify"
-        right={() => (
-          <IconButton icon="filter-variant" onPress={() => setShowFilters(true)} />
-        )}
+        right={() => <IconButton icon="filter-variant" onPress={() => setShowFilters(true)} />}
       />
 
       {/* Active Filters */}
       {(selectedCountry !== 'All' || selectedCity !== 'All' || selectedType !== 'All') && (
-        <ScrollView
-          horizontal
-          style={styles.filterChips}
-          showsHorizontalScrollIndicator={false}
-        >
+        <ScrollView horizontal style={styles.filterChips} showsHorizontalScrollIndicator={false}>
           {selectedCountry !== 'All' && (
-            <Chip
-              mode="flat"
-              onClose={() => setSelectedCountry('All')}
-              style={styles.chip}
-            >
+            <Chip mode="flat" onClose={() => setSelectedCountry('All')} style={styles.chip}>
               {selectedCountry}
             </Chip>
           )}
@@ -109,11 +99,7 @@ export default function JobsScreen() {
       {/* Job Listings */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {MOCK_JOBS.map((job) => (
-          <Card
-            key={job.id}
-            style={styles.jobCard}
-            onPress={() => router.push(`/jobs/${job.id}`)}
-          >
+          <Card key={job.id} style={styles.jobCard} onPress={() => router.push(`/jobs/${job.id}`)}>
             <Card.Content>
               <View style={styles.jobHeader}>
                 <View style={styles.jobInfo}>
@@ -208,11 +194,7 @@ export default function JobsScreen() {
             ))}
           </ScrollView>
 
-          <Button
-            mode="contained"
-            onPress={() => setShowFilters(false)}
-            style={styles.applyButton}
-          >
+          <Button mode="contained" onPress={() => setShowFilters(false)} style={styles.applyButton}>
             Apply Filters
           </Button>
         </Modal>
@@ -237,7 +219,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 16,
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
   },
   headerTitle: {
     fontWeight: 'bold',
@@ -289,7 +271,7 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
   modalContent: {
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
     padding: 24,
     margin: 20,
     borderRadius: 16,

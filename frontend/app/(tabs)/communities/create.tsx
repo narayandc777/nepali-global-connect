@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'expo-router';
-import { colors } from '../../../src/theme/colors';
+import { colors, theme } from '../../../src/theme/colors';
 
 const communitySchema = z.object({
   name: z.string().min(3, 'Community name must be at least 3 characters'),
@@ -25,7 +25,11 @@ export default function CreateCommunityScreen() {
 
   const categories = ['General', 'Technology', 'Sports', 'Lifestyle', 'Education', 'Business'];
 
-  const { control, handleSubmit, formState: { errors } } = useForm<CommunityFormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CommunityFormData>({
     resolver: zodResolver(communitySchema),
     defaultValues: {
       name: '',
@@ -69,7 +73,11 @@ export default function CreateCommunityScreen() {
                 />
               )}
             />
-            {errors.name && <Text variant="bodySmall" style={styles.errorText}>{errors.name.message}</Text>}
+            {errors.name && (
+              <Text variant="bodySmall" style={styles.errorText}>
+                {errors.name.message}
+              </Text>
+            )}
 
             <Controller
               control={control}
@@ -89,9 +97,15 @@ export default function CreateCommunityScreen() {
                 />
               )}
             />
-            {errors.description && <Text variant="bodySmall" style={styles.errorText}>{errors.description.message}</Text>}
+            {errors.description && (
+              <Text variant="bodySmall" style={styles.errorText}>
+                {errors.description.message}
+              </Text>
+            )}
 
-            <Text variant="titleMedium" style={styles.label}>Category</Text>
+            <Text variant="titleMedium" style={styles.label}>
+              Category
+            </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {categories.map((cat) => (
                 <Chip
@@ -158,7 +172,11 @@ export default function CreateCommunityScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <Snackbar visible={snackbarVisible} onDismiss={() => setSnackbarVisible(false)} duration={2000}>
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={2000}
+      >
         Community created successfully!
       </Snackbar>
     </SafeAreaView>
@@ -203,7 +221,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
     padding: 16,
     borderRadius: 12,
     marginVertical: 16,

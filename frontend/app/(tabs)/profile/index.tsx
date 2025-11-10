@@ -3,8 +3,17 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Avatar, Button, List, Divider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../../../src/theme/colors';
+import { useAuth } from '@/src/contexts/AuthContext';
+import { router } from 'expo-router';
 
 export default function ProfileScreen() {
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace('/login');
+  };
+
   const user = {
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -80,7 +89,13 @@ export default function ProfileScreen() {
           />
         </Card>
 
-        <Button mode="contained" icon="logout" buttonColor={colors.error} style={styles.logoutButton}>
+        <Button
+          mode="contained"
+          icon="logout"
+          buttonColor={colors.error}
+          style={styles.logoutButton}
+          onPress={handleLogout}
+        >
           Logout
         </Button>
 

@@ -13,7 +13,7 @@ import {
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { colors } from '../../../src/theme/colors';
+import { colors, theme } from '../../../src/theme/colors';
 
 const MOCK_ROOMS = [
   {
@@ -62,9 +62,7 @@ export default function RoomsScreen() {
         value={searchQuery}
         style={styles.searchBar}
         icon="magnify"
-        right={() => (
-          <IconButton icon="filter-variant" onPress={() => setShowFilters(true)} />
-        )}
+        right={() => <IconButton icon="filter-variant" onPress={() => setShowFilters(true)} />}
       />
 
       {(selectedCountry !== 'All' || selectedCity !== 'All' || selectedType !== 'All') && (
@@ -89,7 +87,11 @@ export default function RoomsScreen() {
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {MOCK_ROOMS.map((room) => (
-          <Card key={room.id} style={styles.roomCard} onPress={() => router.push(`/rooms/${room.id}`)}>
+          <Card
+            key={room.id}
+            style={styles.roomCard}
+            onPress={() => router.push(`/rooms/${room.id}`)}
+          >
             <Card.Cover source={{ uri: 'https://via.placeholder.com/400x200' }} />
             <Card.Content style={styles.cardContent}>
               <Text variant="titleMedium" style={styles.roomTitle}>
@@ -109,7 +111,12 @@ export default function RoomsScreen() {
                   {room.type}
                 </Chip>
               </View>
-              <Chip icon="check-circle" mode="flat" textStyle={styles.availableText} style={styles.availableChip}>
+              <Chip
+                icon="check-circle"
+                mode="flat"
+                textStyle={styles.availableText}
+                style={styles.availableChip}
+              >
                 {room.available}
               </Chip>
             </Card.Content>
@@ -129,7 +136,9 @@ export default function RoomsScreen() {
             <IconButton icon="close" onPress={() => setShowFilters(false)} />
           </View>
 
-          <Text variant="titleMedium" style={styles.filterLabel}>Country</Text>
+          <Text variant="titleMedium" style={styles.filterLabel}>
+            Country
+          </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {countries.map((country) => (
               <Chip
@@ -143,7 +152,9 @@ export default function RoomsScreen() {
             ))}
           </ScrollView>
 
-          <Text variant="titleMedium" style={styles.filterLabel}>City</Text>
+          <Text variant="titleMedium" style={styles.filterLabel}>
+            City
+          </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {cities.map((city) => (
               <Chip
@@ -157,7 +168,9 @@ export default function RoomsScreen() {
             ))}
           </ScrollView>
 
-          <Text variant="titleMedium" style={styles.filterLabel}>Room Type</Text>
+          <Text variant="titleMedium" style={styles.filterLabel}>
+            Room Type
+          </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {roomTypes.map((type) => (
               <Chip
@@ -177,7 +190,12 @@ export default function RoomsScreen() {
         </Modal>
       </Portal>
 
-      <FAB icon="plus" style={styles.fab} onPress={() => router.push('/rooms/post')} label="Post Room" />
+      <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={() => router.push('/rooms/post')}
+        label="Post Room"
+      />
     </SafeAreaView>
   );
 }
@@ -190,7 +208,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 16,
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
   },
   headerTitle: {
     fontWeight: 'bold',
@@ -245,7 +263,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   modalContent: {
-    backgroundColor: colors.surface,
+    backgroundColor: theme.colors.surface,
     padding: 24,
     margin: 20,
     borderRadius: 16,

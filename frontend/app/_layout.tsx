@@ -13,13 +13,13 @@ function RootLayoutNav() {
 
   useEffect(() => {
     if (loading) return;
-
+    debugger;
     if (!user && !loading) {
       // User is not authenticated, redirect to login
       router.replace('/login');
     } else if (user && (segments[0] === 'login' || segments[0] === 'register')) {
       // User is authenticated, redirect to home
-      router.replace('/home');
+      router.replace('/jobs');
     }
   }, [user, loading, segments]);
 
