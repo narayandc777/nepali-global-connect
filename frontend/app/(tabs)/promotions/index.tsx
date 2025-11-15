@@ -99,7 +99,11 @@ export default function JobsScreen() {
       {/* Job Listings */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {MOCK_JOBS.map((job) => (
-          <Card key={job.id} style={styles.jobCard} onPress={() => router.push(`/jobs/${job.id}`)}>
+          <Card
+            key={job.id}
+            style={styles.jobCard}
+            onPress={() => router.push(`/promotions/${job.id}`)}
+          >
             <Card.Content>
               <View style={styles.jobHeader}>
                 <View style={styles.jobInfo}>
@@ -204,7 +208,7 @@ export default function JobsScreen() {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => router.push('/jobs/post')}
+        onPress={() => router.push('/promotions/post')}
         label="Post Job"
       />
     </SafeAreaView>

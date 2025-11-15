@@ -14,21 +14,21 @@ export default function CommunitiesLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: 'Communities',
+          title: 'Group',
           headerLargeTitle: true,
         }}
       />
       <Stack.Screen
         name="create"
         options={{
-          title: 'Create Community',
+          title: 'Create Group',
           presentation: 'modal',
         }}
       />
       <Stack.Screen
         name="[id]"
         options={{
-          title: 'Community',
+          title: 'Group',
         }}
       />
     </Stack>

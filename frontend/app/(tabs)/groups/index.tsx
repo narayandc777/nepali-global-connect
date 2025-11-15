@@ -52,7 +52,7 @@ export default function CommunitiesScreen() {
             <Card
               key={community.id}
               style={styles.myCommunityCard}
-              onPress={() => router.push(`/communities/${community.id}`)}
+              onPress={() => router.push(`/groups/${community.id}`)}
             >
               <Card.Content style={styles.myCommunityContent}>
                 <Avatar.Icon size={48} icon="account-group" style={styles.avatar} />
@@ -79,7 +79,7 @@ export default function CommunitiesScreen() {
           <Card
             key={community.id}
             style={styles.communityCard}
-            onPress={() => router.push(`/communities/${community.id}`)}
+            onPress={() => router.push(`/groups/${community.id}`)}
           >
             <Card.Content>
               <View style={styles.communityHeader}>
@@ -113,7 +113,7 @@ export default function CommunitiesScreen() {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => router.push('/communities/create')}
+        onPress={() => router.push('/groups/create')}
         label="Create"
       />
     </SafeAreaView>

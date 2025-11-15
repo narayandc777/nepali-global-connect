@@ -1,67 +1,39 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../../src/theme/colors';
+import { TAB_CONFIG } from '../../src/config/tab-config';
 
-export default function TabLayout() {
+const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: '#8E8E93',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textGray,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
+          backgroundColor: colors.background,
           borderTopWidth: 1,
-          borderTopColor: '#E5E5EA',
-          // height: 88,
+          height: 90,
+          borderTopColor: colors.border,
           paddingBottom: 32,
           paddingTop: 8,
         },
-        headerStyle: {
-          backgroundColor: '#FFFFFF',
-        },
-        headerShadowVisible: false,
-        headerTintColor: '#000000',
+        headerShown: false,
       }}
     >
-      <Tabs.Screen
-        name="jobs"
-        options={{
-          title: 'Jobs',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="briefcase" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="rooms"
-        options={{
-          title: 'Rooms',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="news"
-        options={{
-          title: 'Events',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="newspaper" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="communities"
-        options={{
-          title: 'Communities',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="people" size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
-        }}
-      />
+      {TAB_CONFIG.map((tab: any) => (
+        <Tabs.Screen
+          key={tab.name}
+          name={tab.name}
+          options={{
+            title: tab.title,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name={tab.icon as any} size={size} color={color} />
+            ),
+          }}
+        />
+      ))}
     </Tabs>
   );
-}
+};
+
+export default TabLayout;

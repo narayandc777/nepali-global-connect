@@ -90,7 +90,7 @@ export default function RoomsScreen() {
           <Card
             key={room.id}
             style={styles.roomCard}
-            onPress={() => router.push(`/rooms/${room.id}`)}
+            //   onPress={() => router.push(`/rooms/${room.id}`)}
           >
             <Card.Cover source={{ uri: 'https://via.placeholder.com/400x200' }} />
             <Card.Content style={styles.cardContent}>
@@ -193,7 +193,7 @@ export default function RoomsScreen() {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => router.push('/rooms/post')}
+        //  onPress={() => router.push('/rooms/post')}
         label="Post Room"
       />
     </SafeAreaView>

@@ -152,7 +152,7 @@ export default function CommunityDetailScreen() {
                     activeOpacity={0.8}
                     onPress={() =>
                       router.push({
-                        pathname: '/communities/event-register',
+                        pathname: '/groups/event-register',
                         params: {
                           id: event.id,
                           title: event.title,
@@ -183,7 +183,7 @@ export default function CommunityDetailScreen() {
                           icon="pencil"
                           compact
                           mode="text"
-                          onPress={() => router.push('/communities/create-events')}
+                          onPress={() => router.push('/groups/create-events')}
                           children={undefined}
                         />
                         <Button
@@ -239,12 +239,12 @@ export default function CommunityDetailScreen() {
                       <Button
                         mode="contained-tonal"
                         icon="message-text-outline"
-                        onPress={() =>
-                          router.push({
-                            pathname: '/messages/chat',
-                            params: { userId: member.id },
-                          })
-                        }
+                        // onPress={() =>
+                        //   router.push({
+                        //     pathname: '/messages/chat',
+                        //     params: { userId: member.id },
+                        //   })
+                        // }
                         compact
                         style={styles.messageButton}
                         textColor={colors.textPrimary}
@@ -270,7 +270,7 @@ export default function CommunityDetailScreen() {
         <FAB
           icon="plus"
           style={styles.fab}
-          onPress={() => router.push('/communities/create-events')}
+          onPress={() => router.push('/groups/create-events')}
           label="Create Event"
         />
       )}
