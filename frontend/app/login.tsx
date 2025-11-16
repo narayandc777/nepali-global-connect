@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { Text, TextInput, Button, Snackbar } from 'react-native-paper';
-import { useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { Text, TextInput } from 'react-native-paper';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { LoginFormData, loginSchema } from '../src/utils/forms/formFields';
 import { Link, router } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../src/contexts/AuthContext';
 import { GlobeIcon } from '../src/components/GlobeIcon';
+import { AuthScreen } from '../src/components/container/AuthScreen';
+import { MBTextInput } from '../src/components/ui/MBTextInput';
+import { MBTextLink } from '../src/components/ui/MBTextLink';
+import { MBButton } from '../src/components/ui/MBButton';
+import { MBDivider } from '../src/components/ui/MBDivider';
+import { MBNotificationBar } from '../src/components/ui/MBNotificationBar';
 import { colors } from '../src/theme/colors';
 
-const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-});
-
-type LoginFormData = z.infer<typeof loginSchema>;
-
-export default function LoginScreen() {
+const LoginScreen = () => {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -51,169 +49,77 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Background decorative circles */}
-          <View style={styles.backgroundCircle1} />
-          <View style={styles.backgroundCircle2} />
+    <AuthScreen>
+      <View style={styles.container}>
+        {/* Header with Globe */}
+        <View style={styles.header}>
+          <GlobeIcon size={100} color={colors.primary} />
+          <Text style={styles.title}>Nepali Global Connect</Text>
+          <Text style={styles.subtitle}>Welcome Back!</Text>
+          <Text style={styles.description}>Login to connect with Nepalese worldwide</Text>
+        </View>
 
-          <View style={styles.container}>
-            {/* Header with Globe */}
-            <View style={styles.header}>
-              <GlobeIcon size={100} color={colors.primary} />
-              <Text style={styles.title}>Nepali Global Connect</Text>
-              <Text style={styles.subtitle}>Welcome Back!</Text>
-              <Text style={styles.description}>Login to connect with Nepalese worldwide</Text>
-            </View>
+        {/* Login Form */}
+        <View style={styles.formContainer}>
+          <MBTextInput
+            control={control}
+            name="email"
+            label="Email"
+            placeholder="Enter your email"
+            error={errors.email?.message}
+            left={<TextInput.Icon icon="email-outline" color={colors.primary} />}
+          />
 
-            {/* Login Form */}
-            <View style={styles.formContainer}>
-              <Controller
-                control={control}
-                rules={{ required: false }}
-                name="email"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    label="Email"
-                    mode="outlined"
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    error={!!errors.email}
-                    style={styles.input}
-                    outlineColor={colors.border}
-                    activeOutlineColor={colors.primary}
-                    theme={{ colors: { background: colors.background } }}
-                    left={<TextInput.Icon icon="email-outline" color={colors.primary} />}
-                  />
-                )}
+          <MBTextInput
+            control={control}
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+            secureTextEntry={!showPassword}
+            error={errors.password?.message}
+            left={<TextInput.Icon icon="lock-outline" color={colors.primary} />}
+            right={
+              <TextInput.Icon
+                icon={showPassword ? 'eye-off' : 'eye'}
+                onPress={() => setShowPassword(!showPassword)}
+                color={colors.primary}
               />
-              {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
+            }
+          />
 
-              <Controller
-                control={control}
-                rules={{ required: false }}
-                name="password"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    label="Password"
-                    mode="outlined"
-                    value={value}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    secureTextEntry={!showPassword}
-                    error={!!errors.password}
-                    style={styles.input}
-                    outlineColor={colors.border}
-                    activeOutlineColor={colors.primary}
-                    theme={{ colors: { background: colors.background } }}
-                    left={<TextInput.Icon icon="lock-outline" color={colors.primary} />}
-                    right={
-                      <TextInput.Icon
-                        icon={showPassword ? 'eye-off' : 'eye'}
-                        onPress={() => setShowPassword(!showPassword)}
-                        color={colors.primary}
-                      />
-                    }
-                  />
-                )}
-              />
-              {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+          <MBTextLink text="Forgot Password?" href="/forgot-password" position="end" />
+          <MBButton variant="primary" onPress={handleSubmit(onSubmit)} loading={loading}>
+            Login
+          </MBButton>
 
-              <View style={styles.forgotPasswordContainer}>
-                <Link href="/forgot-password" asChild>
-                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-                </Link>
-              </View>
+          <MBDivider text="OR" />
 
-              <Button
-                mode="contained"
-                onPress={handleSubmit(onSubmit)}
-                loading={loading}
-                disabled={loading}
-                style={styles.loginButton}
-                contentStyle={styles.loginButtonContent}
-                buttonColor={colors.primary}
-                textColor={colors.textWhite}
-              >
-                Login
-              </Button>
-
-              <View style={styles.divider}>
-                <View style={styles.dividerLine} />
-                <Text style={styles.dividerText}>OR</Text>
-                <View style={styles.dividerLine} />
-              </View>
-
-              <View style={styles.signupContainer}>
-                <Text style={styles.signupText}>Don't have an account? </Text>
-                <Link href="/register" asChild>
-                  <Text style={styles.signupLink}>Sign Up</Text>
-                </Link>
-              </View>
-            </View>
+          <View style={styles.signupContainer}>
+            <Text style={styles.signupText}>Don't have an account? </Text>
+            <Link href="/register" asChild>
+              <Pressable>
+                <Text style={styles.signupLink}>Sign Up</Text>
+              </Pressable>
+            </Link>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </View>
+      </View>
 
-      <Snackbar
+      <MBNotificationBar
         visible={snackbarVisible}
+        message={error}
+        type="error"
         onDismiss={() => setSnackbarVisible(false)}
-        duration={3000}
-        style={styles.snackbar}
-      >
-        {error}
-      </Snackbar>
-    </SafeAreaView>
+      />
+    </AuthScreen>
   );
-}
+};
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    paddingVertical: 32,
-  },
-  backgroundCircle1: {
-    position: 'absolute',
-    width: 300,
-    height: 300,
-    borderRadius: 150,
-    backgroundColor: colors.primaryVeryLight,
-    top: -100,
-    right: -100,
-    opacity: 0.6,
-  },
-  backgroundCircle2: {
-    position: 'absolute',
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: colors.accentLight,
-    bottom: -50,
-    left: -50,
-    opacity: 0.4,
-  },
   container: {
     flex: 1,
-    padding: 24,
   },
   header: {
     alignItems: 'center',
@@ -244,47 +150,6 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     alignSelf: 'center',
   },
-  input: {
-    marginBottom: 8,
-    backgroundColor: colors.background,
-  },
-  errorText: {
-    color: colors.error,
-    fontSize: 12,
-    marginBottom: 12,
-    marginLeft: 8,
-  },
-  forgotPasswordContainer: {
-    alignItems: 'flex-end',
-    marginBottom: 24,
-  },
-  forgotPasswordText: {
-    color: colors.primary,
-    fontWeight: '600',
-    fontSize: 14,
-  },
-  loginButton: {
-    marginVertical: 8,
-    borderRadius: 8,
-  },
-  loginButtonContent: {
-    paddingVertical: 8,
-  },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: colors.border,
-  },
-  dividerText: {
-    marginHorizontal: 16,
-    color: colors.textGray,
-    fontSize: 14,
-  },
   signupContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -298,8 +163,5 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontWeight: 'bold',
     fontSize: 14,
-  },
-  snackbar: {
-    backgroundColor: colors.error,
   },
 });

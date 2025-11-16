@@ -84,7 +84,7 @@ export default function EventRegisterScreen() {
           <Button
             mode="contained"
             style={styles.backButton}
-            onPress={() => router.replace('/(tabs)/communities')}
+            onPress={() => router.replace('/(tabs)/groups')}
           >
             Back to Events
           </Button>

@@ -2,30 +2,29 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, HelperText } from 'react-native-paper';
 import { Control, Controller } from 'react-hook-form';
+import { colors } from '../../theme/colors';
 
-interface AuthInputProps {
+interface MBTextInputProps {
   control: Control<any>;
   name: string;
   label: string;
   placeholder?: string;
   secureTextEntry?: boolean;
-  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   error?: string;
+  left?: any;
+  right?: any;
 }
 
-export const AuthInput: React.FC<AuthInputProps> = ({
+export const MBTextInput: React.FC<MBTextInputProps> = ({
   control,
   name,
   label,
   placeholder,
   secureTextEntry = false,
-  keyboardType = 'default',
-  autoCapitalize = 'none',
   error,
+  left,
+  right,
 }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   return (
     <View style={styles.container}>
       <Controller
@@ -39,19 +38,14 @@ export const AuthInput: React.FC<AuthInputProps> = ({
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
-            secureTextEntry={secureTextEntry && !isPasswordVisible}
-            keyboardType={keyboardType}
-            autoCapitalize={autoCapitalize}
+            secureTextEntry={secureTextEntry}
             error={!!error}
-            right={
-              secureTextEntry ? (
-                <TextInput.Icon
-                  icon={isPasswordVisible ? 'eye-off' : 'eye'}
-                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                />
-              ) : undefined
-            }
             style={styles.input}
+            outlineColor={colors.border}
+            activeOutlineColor={colors.primary}
+            theme={{ colors: { background: colors.background } }}
+            left={left}
+            right={right}
           />
         )}
       />

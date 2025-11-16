@@ -10,18 +10,20 @@ function RootLayoutNav() {
   const { user, loading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
+  const publicRoutes = ['login', 'register', 'forgot-password', 'reset-password'];
 
   useEffect(() => {
     if (loading) return;
-    debugger;
-    if (!user && !loading) {
-      // User is not authenticated, redirect to login
-      router.replace('/login');
-    } else if (user && (segments[0] === 'login' || segments[0] === 'register')) {
-      // User is authenticated, redirect to home
-      router.replace('/home');
+
+    // If user NOT logged in
+    if (!user) {
+      if (!publicRoutes.includes(segments[0])) router.replace('/login');
+      return;
     }
-  }, [user, loading, segments]);
+
+    // If user IS logged in
+    if (publicRoutes.includes(segments[0])) router.replace('/(tabs)/home');
+  }, [user, loading, segments, publicRoutes]);
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
