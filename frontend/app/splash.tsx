@@ -15,7 +15,7 @@ export default function SplashScreen() {
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
-        duration: 1000,
+        duration: 5000,
         useNativeDriver: true,
       }),
       Animated.spring(scaleAnim, {
@@ -38,7 +38,7 @@ export default function SplashScreen() {
     // Navigate after animation
     const timer = setTimeout(() => {
       router.replace('/login');
-    }, 3000);
+    }, 9000);
 
     return () => clearTimeout(timer);
   }, []);

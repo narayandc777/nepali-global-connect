@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Searchbar, Card, Avatar, Chip } from 'react-native-paper';
-import { useRouter } from 'expo-router';
+import { Text, Card, Avatar, Chip } from 'react-native-paper';
+import { useGlobalSearchParams, useRouter } from 'expo-router';
 import { colors, theme } from '../../../src/theme/colors';
 import UIScreen from '../../../src/components/container/UIScreen';
 
@@ -42,8 +41,10 @@ const MOCK_COMMUNITIES = [
 
 export default function CommunitiesScreen() {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
 
+  const { q } = useGlobalSearchParams<{ q?: string }>();
+  const searchQuery = q?.toLowerCase() || '';
+  console.log('search params', searchQuery);
   return (
     <UIScreen
       showFab
@@ -56,13 +57,6 @@ export default function CommunitiesScreen() {
           Communities
         </Text>
       </View>
-
-      <Searchbar
-        placeholder="Search communities..."
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-        style={styles.searchBar}
-      />
 
       <View style={styles.section}>
         <Text variant="titleLarge" style={styles.sectionTitle}>

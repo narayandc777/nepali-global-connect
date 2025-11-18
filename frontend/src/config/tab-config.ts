@@ -1,4 +1,6 @@
-export const TAB_CONFIG = [
+import { TabConfigItem } from '../utils/types/tabs';
+
+export const TAB_CONFIG: TabConfigItem[] = [
   {
     name: 'home',
     title: 'Home',
