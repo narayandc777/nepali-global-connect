@@ -4,4 +4,5 @@ export type TabConfigItem = {
   name: TabRouteNames; // Use the type
   title: string;
   icon: string;
+  showSearch: boolean;
 };

@@ -7,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'expo-router';
 import { colors, theme } from '../../../src/theme/colors';
+import UIScreen from '@/src/components/container/UIScreen';
+import { MBTextInput } from '@/src/components/ui/MBTextInput';
 
 const communitySchema = z.object({
   name: z.string().min(3, 'Community name must be at least 3 characters'),
@@ -46,160 +48,119 @@ export default function CreateCommunityScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-          <View style={styles.content}>
-            <Text variant="headlineMedium" style={styles.title}>
-              Create Community
-            </Text>
+    <UIScreen>
+      <View style={styles.section}>
+        <MBTextInput
+          control={control}
+          name="name"
+          label="Community Name *"
+          placeholder="e.g. Tech Enthusiasts NYC"
+          error={errors.name?.message}
+        />
 
-            <Controller
-              control={control}
-              name="name"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  label="Community Name *"
-                  mode="outlined"
-                  placeholder="e.g. Tech Enthusiasts NYC"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  error={!!errors.name}
-                  style={styles.input}
-                />
-              )}
-            />
-            {errors.name && (
-              <Text variant="bodySmall" style={styles.errorText}>
-                {errors.name.message}
-              </Text>
-            )}
+        <MBTextInput
+          control={control}
+          name="description"
+          label="Description *"
+          placeholder="Describe your community..."
+          error={errors.description?.message}
+        />
 
-            <Controller
-              control={control}
-              name="description"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  label="Description *"
-                  mode="outlined"
-                  placeholder="Describe your community..."
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  multiline
-                  numberOfLines={4}
-                  error={!!errors.description}
-                  style={styles.input}
-                />
-              )}
-            />
-            {errors.description && (
-              <Text variant="bodySmall" style={styles.errorText}>
-                {errors.description.message}
-              </Text>
-            )}
-
-            <Text variant="titleMedium" style={styles.label}>
-              Category
-            </Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {categories.map((cat) => (
-                <Chip
-                  key={cat}
-                  selected={category === cat}
-                  onPress={() => setCategory(cat)}
-                  style={styles.chip}
-                >
-                  {cat}
-                </Chip>
-              ))}
-            </ScrollView>
-
-            <Controller
-              control={control}
-              name="location"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  label="Location"
-                  mode="outlined"
-                  placeholder="e.g. New York, NY"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  style={styles.input}
-                />
-              )}
-            />
-
-            <View style={styles.switchContainer}>
-              <View style={styles.switchInfo}>
-                <Text variant="titleMedium">Private Community</Text>
-                <Text variant="bodySmall" style={styles.switchDescription}>
-                  Require approval for new members
-                </Text>
-              </View>
-              <Switch value={isPrivate} onValueChange={setIsPrivate} />
-            </View>
-
-            <Controller
-              control={control}
-              name="rules"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  label="Community Rules"
-                  mode="outlined"
-                  placeholder="List any rules or guidelines..."
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  multiline
-                  numberOfLines={4}
-                  style={styles.input}
-                />
-              )}
-            />
-
-            <Button mode="contained" onPress={handleSubmit(onSubmit)} style={styles.submitButton}>
-              Create Community
-            </Button>
-
-            <View style={styles.bottomPadding} />
-          </View>
+        <Text variant="titleMedium" style={styles.label}>
+          Category
+        </Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {categories.map((cat) => (
+            <Chip
+              key={cat}
+              selected={category === cat}
+              onPress={() => setCategory(cat)}
+              style={styles.chip}
+            >
+              {cat}
+            </Chip>
+          ))}
         </ScrollView>
-      </KeyboardAvoidingView>
 
-      <Snackbar
-        visible={snackbarVisible}
-        onDismiss={() => setSnackbarVisible(false)}
-        duration={2000}
-      >
-        Community created successfully!
-      </Snackbar>
-    </SafeAreaView>
+        <MBTextInput
+          control={control}
+          name="location"
+          label="Location"
+          placeholder="e.g. New York, NY"
+          error={errors.location?.message}
+        />
+
+        <View style={styles.switchContainer}>
+          <View style={styles.switchInfo}>
+            <Text variant="titleMedium">Private Community</Text>
+            <Text variant="bodySmall" style={styles.switchDescription}>
+              Require approval for new members
+            </Text>
+          </View>
+          <Switch value={isPrivate} onValueChange={setIsPrivate} />
+        </View>
+
+        <MBTextInput
+          control={control}
+          name="rules"
+          label="Community Rules"
+          placeholder="List any rules or guidelines..."
+          error={errors.rules?.message}
+        />
+
+        <MBTextInput
+          control={control}
+          name="country"
+          label="country"
+          placeholder="List any rules or guidelines..."
+          error={errors.rules?.message}
+        />
+
+        <MBTextInput
+          control={control}
+          name="rules"
+          label="Community Rules"
+          placeholder="List any rules or guidelines..."
+          error={errors.rules?.message}
+        />
+
+        <MBTextInput
+          control={control}
+          name="country"
+          label="country"
+          placeholder="List any rules or guidelines..."
+          error={errors.rules?.message}
+        />
+
+        <MBTextInput
+          control={control}
+          name="rules"
+          label="Community Rules"
+          placeholder="List any rules or guidelines..."
+          error={errors.rules?.message}
+        />
+
+        <Button mode="contained" onPress={handleSubmit(onSubmit)} style={styles.submitButton}>
+          Create Community
+        </Button>
+
+        <View style={styles.bottomPadding} />
+
+        <Snackbar
+          visible={snackbarVisible}
+          onDismiss={() => setSnackbarVisible(false)}
+          duration={2000}
+        >
+          Community created successfully!
+        </Snackbar>
+      </View>
+    </UIScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  content: {
-    padding: 16,
-  },
-  title: {
-    fontWeight: 'bold',
-    marginBottom: 24,
+  section: {
+    marginTop: 8,
   },
   label: {
     marginTop: 16,

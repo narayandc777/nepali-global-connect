@@ -1,22 +1,23 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform, TouchableOpacity, Text } from 'react-native';
 import { Searchbar, Avatar } from 'react-native-paper';
 import { colors, theme } from '../../../src/theme/colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 interface MBHeaderSearchProps {
-  searchQuery: string;
-  setSearchQuery: any;
+  searchQuery?: string;
+  setSearchQuery?: any;
   onProfilePress?: any;
 }
 
 const MBHeaderSearch: React.FC<MBHeaderSearchProps> = ({
-  searchQuery,
+  searchQuery = '',
   setSearchQuery,
   onProfilePress,
 }) => {
   return (
-    <SafeAreaView style={styles.headerContainer}>
+    <SafeAreaView edges={['top']} style={styles.headerContainer}>
       <View style={styles.contentRow}>
         <Searchbar
           placeholder="Search..."
@@ -38,24 +39,19 @@ const MBHeaderSearch: React.FC<MBHeaderSearchProps> = ({
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: colors.background,
-    paddingTop: 0,
-    paddingBottom: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    paddingHorizontal: 16,
   },
   contentRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    height: 56,
   },
   searchBar: {
     flex: 1,
-    height: 38,
+    height: 42,
     marginRight: 10,
     backgroundColor: theme.colors.surface,
   },
@@ -65,6 +61,14 @@ const styles = StyleSheet.create({
   },
   profileIcon: {
     backgroundColor: 'transparent',
+  },
+  backButton: {
+    marginRight: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: colors.textPrimary,
   },
 });
 

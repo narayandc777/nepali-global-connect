@@ -26,6 +26,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (__DEV__) {
+      // DEV MODE: auto-login as a dummy user
+      setUser({
+        id: 'dev-user',
+        email: 'dev@example.com',
+        username: 'dev',
+        created_at: new Date().toISOString(),
+      });
+      setLoading(false);
+      return;
+    }
+
     checkAuth();
   }, []);
 

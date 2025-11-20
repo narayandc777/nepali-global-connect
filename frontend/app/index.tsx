@@ -17,15 +17,23 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, []);
 
+  // FOR DEVELOPING MODE:
   useEffect(() => {
-    if (!loading && !showSplash) {
-      if (user) {
-        router.replace('/home');
-      } else {
-        router.replace('/login');
-      }
+    if (!showSplash) {
+      // Temporarily skip login for development
+      router.replace('/groups');
     }
-  }, [user, loading, showSplash]);
+  }, [showSplash, router]);
+
+  // useEffect(() => {
+  //   if (!loading && !showSplash) {
+  //     if (user) {
+  //       router.replace('/home');
+  //     } else {
+  //       router.replace('/login');
+  //     }
+  //   }
+  // }, [user, loading, showSplash]);
 
   if (showSplash) {
     return <SplashScreen />;

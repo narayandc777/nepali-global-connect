@@ -52,12 +52,6 @@ export default function CommunitiesScreen() {
       fabIcon="plus"
       onFabPress={() => router.push('/groups/create')}
     >
-      <View style={styles.header}>
-        <Text variant="headlineLarge" style={styles.headerTitle}>
-          Communities
-        </Text>
-      </View>
-
       <View style={styles.section}>
         <Text variant="titleLarge" style={styles.sectionTitle}>
           My Communities
@@ -130,24 +124,8 @@ export default function CommunitiesScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: theme.colors.surface,
-  },
-  headerTitle: {
-    fontWeight: 'bold',
-  },
-
-  searchBar: {
-    marginHorizontal: 16,
-    marginTop: 16,
-    marginBottom: 8,
-  },
-
   section: {
-    paddingHorizontal: 16,
-    marginTop: 24,
+    marginTop: 8,
   },
   sectionTitle: {
     fontWeight: '600',
@@ -176,7 +154,6 @@ const styles = StyleSheet.create({
 
   communityCard: {
     marginTop: 12,
-    marginHorizontal: 16,
   },
 
   communityHeader: {

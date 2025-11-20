@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.background,
+    paddingHorizontal: 16, // horizontal only
+    paddingTop: 0, // let header handle top
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
   },
   flex: {
     flex: 1,
